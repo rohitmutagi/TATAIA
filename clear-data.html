@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reset Data | Tata AIA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #fce4ec, #e3f2fd);
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .reset-card {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .btn-clear {
+      background: linear-gradient(90deg, #e53935, #d32f2f);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: 0.3s ease;
+    }
+
+    .btn-clear:hover {
+      background: linear-gradient(90deg, #d32f2f, #b71c1c);
+      transform: scale(1.03);
+    }
+
+    .toast-success {
+      margin-top: 20px;
+      display: none;
+      color: green;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reset-card">
+    <h3>🗑️ Clear All Saved Data</h3>
+    <p>This will remove all stored information including advisors, professionals, and leaders.</p>
+    <button class="btn-clear" onclick="clearAllData()">Clear All Data</button>
+    <div id="successMsg" class="toast-success">✅ Data cleared successfully!</div>
+  </div>
+
+  <script>
+    function clearAllData() {
+      localStorage.clear();
+      document.getElementById("successMsg").style.display = "block";
+    }
+  </script>
+</body>
+</html>
