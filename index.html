@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | Tata AIA Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .border-gradient {
+      padding: 2px;
+      border-radius: 20px;
+      background: linear-gradient(90deg, #2196f3, #00c853, #ff6f00, #d500f9);
+      background-size: 300% 300%;
+      animation: borderMove 4s linear infinite;
+    }
+
+    .login-box {
+      background: white;
+      border-radius: 18px;
+      padding: 40px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    @keyframes borderMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h3 {
+      font-weight: bold;
+      color: #003366;
+      margin-bottom: 25px;
+    }
+
+    .form-control {
+      border-radius: 30px;
+      padding: 12px 20px;
+      margin-bottom: 15px;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(90deg, #2196f3, #1565c0);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 12px;
+      width: 100%;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .btn-gradient:hover {
+      background: linear-gradient(90deg, #1565c0, #0d47a1);
+      transform: scale(1.03);
+    }
+
+    #toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #4caf50;
+      color: white;
+      padding: 16px 30px;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 16px;
+      display: none;
+      z-index: 1000;
+      animation: fadeInOut 2s ease-in-out;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translate(-50%, -60%); }
+      30% { opacity: 1; transform: translate(-50%, -50%); }
+      100% { opacity: 0; transform: translate(-50%, -50%); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="border-gradient">
+    <div class="login-box">
+      <h3>🔐 Tata AIA Login</h3>
+      <form onsubmit="login(event)">
+        <input type="text" id="username" class="form-control" placeholder="Enter your name" required />
+        <input type="password" id="password" class="form-control" placeholder="Enter password" required />
+        <button type="submit" class="btn-gradient">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast">✅ Login Successful! Redirecting...</div>
+
+  <script>
+    function login(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const toast = document.getElementById("toast");
+
+      if (password === "demo") {
+        localStorage.setItem("username", username);
+        toast.innerText = "✅ Login Successful! Redirecting...";
+        toast.style.backgroundColor = "#4caf50";
+        toast.style.display = "block";
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 1500);
+      } else {
+        toast.innerText = "❌ Incorrect password. Try 'demo'.";
+        toast.style.backgroundColor = "#e53935";
+        toast.style.display = "block";
+        setTimeout(() => {
+          toast.style.display = "none";
+        }, 1500);
+      }
+    }
+  </script>
+
+</body>
+</html>

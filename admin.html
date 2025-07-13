@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel | Tata AIA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg" style="background: linear-gradient(90deg, #003366, #004080);">
+    <div class="container-fluid">
+      <span class="navbar-brand text-white fw-bold">Tata AIA Admin Panel</span>
+      <div>
+        <a href="home.html" class="btn btn-outline-light me-2">🏠 Home</a>
+        <a href="group1.html" class="btn btn-outline-light">👥 Group 1</a>
+      </div>
+    </div>
+  </nav>
+  <div class="container py-4">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="advisorDropdown" class="form-label fw-semibold">Select Advisor:</label>
+       <select id="advisorDropdown" class="form-select w-50 mb-4">
+  <option disabled selected>Select Advisor</option>
+</select>
+
+
+      </div>
+    </div>
+    <h4 class="mb-3 fw-bold">Professionals</h4>
+    <div id="results" class="row g-4"></div>
+    <div class="mt-5">
+      <label for="message" class="form-label fw-semibold">Send Message:</label>
+      <textarea id="message" class="form-control mb-2" rows="3" placeholder="Type message..."></textarea>
+      <button class="btn btn-gradient px-4" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  <script src="data.js"></script>
+  <script>
+    function showProfessionals() {
+      const results = document.getElementById("results");
+      results.innerHTML = "";
+      const advisor = document.getElementById("advisorDropdown").value;
+      getProfessionals().forEach(p => {
+        results.insertAdjacentHTML('beforeend', `
+          <div class="col-md-4">
+            <div class="card shadow-lg p-3 prof-card" style="background: linear-gradient(135deg, #f8f9fa, #dee2e6);">
+              <div class="card-body">
+                <h5 class="card-title">${p.name}</h5>
+                <p class="mb-1"><strong>Category:</strong> ${p.category}</p>
+                <p class="mb-1"><strong>City:</strong> ${p.city}</p>
+                <p class="mb-1"><strong>Address:</strong> ${p.address}</p>
+              </div>
+            </div>
+          </div>`);
+      });
+    }
+    function sendMessage() {
+      const msg = message.value.trim();
+      if (msg) {
+        alert("✅ Message sent successfully!");
+        message.value = '';
+      } else {
+        alert("⚠️ Please enter a message.");
+      }
+    }
+    document.getElementById("advisorDropdown").addEventListener("change", showProfessionals);
+    showProfessionals();
+  </script>
+  <script>
+  function loadAdvisors() {
+    const dropdown = document.getElementById("advisorDropdown");
+    const advisors = JSON.parse(localStorage.getItem("advisors") || "[]");
+
+    advisors.forEach(advisor => {
+      const option = document.createElement("option");
+      option.value = advisor.code || advisor.name;
+      option.textContent = `${advisor.name} (${advisor.code || 'NoCode'})`;
+      dropdown.appendChild(option);
+    });
+  }
+
+  loadAdvisors(); // call on page load
+</script>
+
+</body>
+</html>
